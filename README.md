@@ -27,24 +27,24 @@ public class HowToDecryptAPIN {
      */
     public static void main(String[] args) {
     
-	// PAN and PIN informed by the user (ie.: via POS or ATM)
+		// PAN and PIN informed by the user (ie.: via POS or ATM)
         String pan = "4000340000000500"; // card number
-	String encryptedPin = "FA8EA4D3FCB5466E"; // pin=2020
+		String encryptedPin = "FA8EA4D3FCB5466E"; // pin=2020
         
-	// keys restored from our app
+		// keys restored from our app
         EncryptedZpk encryptedZpk = new EncryptedZpk("A5FFF148D005286C2CAA46B785FCDD02");
         MasterKey masterKey = MasterKey.combined(
                             "B4089E65CF3ED07DF4D9EB31334B3494", // key1
                             "E2E9668244CE6E673040711F4B851420", // key2
                             "190F2C84CA89B09E8F8FA9D41671398B");// key3
         
-	// now we can decrypt the PIN
+		// now we can decrypt the PIN
         KeyStorage keyStorage = new SimpleKeyStorage() // or new DatabaseKeyStorage();
                                         .withMasterKey(masterKey)
                                         .withEncryptedZpk(encryptedZpk);
 	
-	PinDecrypter decrypter = new PinDecrypter(keyStorage);
-	String pin = decrypter.decrypt(encryptedPin, pan);
+		PinDecrypter decrypter = new PinDecrypter(keyStorage);
+		String pin = decrypter.decrypt(encryptedPin, pan);
     
         System.out.println("plain text PIN: " + pin);
     }
